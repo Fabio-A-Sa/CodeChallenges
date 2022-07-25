@@ -1,8 +1,9 @@
 from contextlib import nullcontext
 from string import ascii_lowercase as abc
 from string import ascii_uppercase as ABC
-from math import pow, sqrt
+import math
 import re as regex
+import sys
 
 DATA = "data/level"
 
@@ -20,7 +21,7 @@ def root(range: int, letter: str) -> str:
     return abc[(abc.find(letter) + range) % len(abc)] if letter in abc else nullcontext
 
 def solve0():
-    print(int(pow(2, 38))) # solution: 274877906944
+    print(int(math.pow(2, 38))) # solution: 274877906944
 
 def solve1():
     
@@ -43,7 +44,31 @@ def solve1():
 
 def solve2():
 
+    dictionary = dict()
+    data = getData(2)
+    for char in data:
+        if char in dictionary.keys():
+            dictionary[char] += 1
+        else: dictionary[char] = 1
+
+    minimum = math.inf
+    for frequency in dictionary.values():
+        minimum = min(minimum, frequency)
+    
+    for key, value in dictionary.items():
+        if value == minimum:
+            print(key, end= "") # solution: equality
+
+def solve3():
+
+    data = getData(3)
+    regularExpression = "(?<=[a-z][A-Z]{3})[a-z](?=[A-Z]{3}[a-z])"
+    for letter in regex.findall(regularExpression, data):
+        print(letter, end = "\n") # solution: linkedlist
+
+def solve4():
+
     return 0
 
 if __name__ == "__main__":
-    solve2()
+    solve3()
