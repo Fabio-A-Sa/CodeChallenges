@@ -5,6 +5,7 @@ import math
 import re as regex
 import sys
 from urllib import request
+import pickle
 
 DATA = "data/level"
 
@@ -86,5 +87,16 @@ def solve4():
     # Número de iterações: 83 + 163
     print("Solution: {}".format(initial)) # solution: 66831
 
+def solve5():
+
+    file = open("data/level5.p", "rb")
+    items = pickle.load(file)
+
+    for item in items:
+        for char, times in item:
+            print(char*times, end="")
+        print("\n")
+    # Solution: channel
+
 if __name__ == "__main__":
-    solve4()
+    solve5()
