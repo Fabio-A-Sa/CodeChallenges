@@ -4,6 +4,7 @@ from string import ascii_uppercase as ABC
 import math
 import re as regex
 import sys
+from urllib import request
 
 DATA = "data/level"
 
@@ -64,11 +65,26 @@ def solve3():
     data = getData(3)
     regularExpression = "(?<=[a-z][A-Z]{3})[a-z](?=[A-Z]{3}[a-z])"
     for letter in regex.findall(regularExpression, data):
-        print(letter, end = "\n") # solution: linkedlist
+        print(letter, end = "") # solution: linkedlist
 
 def solve4():
 
-    return 0
+    '''
+    Depois de 83 iterações, no número 16044, a continuação é com 16044/2 = 8022
+    '''
+    initial = 8022
+    i = 0
+    while True:
+        try:
+            text = repr(request.urlopen("http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing={}".format(initial)).read())
+            initial = regex.findall("(?<=the next nothing is )[0-9]+", text)[0]
+            print(i, initial)
+            i += 1
+        except Exception:
+            break
+    
+    # Número de iterações: 83 + 163
+    print("Solution: {}".format(initial)) # solution: 66831
 
 if __name__ == "__main__":
-    solve3()
+    solve4()
