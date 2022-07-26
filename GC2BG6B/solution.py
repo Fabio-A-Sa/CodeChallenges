@@ -6,6 +6,7 @@ import re as regex
 import sys
 from urllib import request
 import pickle
+import zipfile
 
 DATA = "data/level"
 
@@ -95,8 +96,27 @@ def solve5():
     for item in items:
         for char, times in item:
             print(char*times, end="")
-        print("\n")
-    # Solution: channel
+        print("\n") # Solution: channel
+
+def solve6():
+
+    data = ""
+    initial = 90052
+    while True:
+
+        data = ""
+        with open(DATA + "6/{}.txt".format(initial), "r") as file:
+            data = ''.join([line.replace("\n", "").strip() for line in file.readlines()])
+            file.close()
+            
+        try:
+            initial = regex.findall("[0-9]+", data)[0]
+        except Exception:
+            break
+
+    print("Solution: {}\n{}".format(initial, data)) # 46145, Collect the comments
+    file = zipfile.ZipFile("data/level6.zip","r").getinfo("{}.txt".format(initial)).comment.decode("utf-8")
+    print(file, end="") # Solution: oxigen
 
 if __name__ == "__main__":
-    solve5()
+    solve6()
