@@ -116,7 +116,7 @@ def solve6():
 
     print("Solution: {}\n{}".format(initial, data)) # 46145, Collect the comments
     file = zipfile.ZipFile("data/level6.zip","r").getinfo("{}.txt".format(initial)).comment.decode("utf-8")
-    print(file, end="") # Solution: oxigen
+    print(file, end="") # Solution: oxygen
 
 if __name__ == "__main__":
     solve6()
